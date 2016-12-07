@@ -5,10 +5,12 @@ import VueResource from 'vue-resource'
 import App from './App'
 import Home from './components/Home'
 
+import router from './router/index'
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-const routes = [{
+/*const routes = [{
   path : '/',
   component : Home
 },{
@@ -18,7 +20,7 @@ const routes = [{
 
 const router = new VueRouter({
   routes
-});
+});*/
 
 
 

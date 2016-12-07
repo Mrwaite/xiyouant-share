@@ -1,28 +1,132 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <div class="header">
+      <div class="inner">
+        <router-link to="/" exact>
+          <img class="logo" src="./assets/logo.png" alt="logo">
+        </router-link>
+        <router-link to="/path/fe">前端</router-link>
+        <router-link to="/path/safe">网络</router-link>
+        <router-link to="/path/net">安全</router-link>
+        <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">
+          Built with Vue.js
+        </a>
+      </div>
+    </div>
+    <transition name="fade" mode="out-in">
+      <router-view class="view"></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
 import Hello from './components/Hello'
 
+
 export default {
   name: 'app',
   components: {
-    Hello
+    
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+$base_backgroundColor : #42b983;
+$base_fontSize : 15px;
+$base_color : #34495e;
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", Arial, Verdana, 'Open Sans', sans-serif;
+  font-size : $base_fontSize;
+  background-color : #f2f3f5;
+  margin : 0;
+  padding-top: 55px;
+  color : $base_color;
+  overflow-y : scroll;
+}
+
+a {
+  color : $base_color;
+  text-decoration : none;
+}
+
+.header {
+  background-color: $base_backgroundColor;
+  position : fixed;
+  z-index : 999;
+  height : 55px;
+  top : 0;
+  left : 0;
+  right : 0;
+  .inner {
+    max-width : 800px;
+    box-sizing : border-box;
+    margin : 0px auto;
+    padding : 15px 5px;
+  }
+  a {
+    color : rgba(255, 255, 255, 0.8);
+    line-height : 24px;
+    transition: color 0.15s ease;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 300px;
+    letter-spacing: 0.075em;
+    margin-right: 1.8em;
+    &:hover {color: #fff;}
+    &:router-link-active {color: #fff;font-weight: 400;}
+    &::nth-child(6) {margin-right: 0}
+  }
+  .github{
+    color: #fff;
+    font-size: 0.9em;
+    margin: 0;
+    float: right;
+  }
+
+}
+
+.logo {
+  width: 24px;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.view {
+  max-width: 800px;
+  margin: 0px auto;
+  position: relative;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: all 0.2s ease;
+}
+
+.fade-enter, .fade-leave-active{
+  opacity: 0;
+}
+
+@media (max-width : 860px){
+  .header .inner {
+    padding: 15px 30px;
+  }
+}
+
+@media (max-width : 600px) {
+  body {
+    font-size: 14px;
+  }
+  .header{
+    .inner{
+      padding: 15px;
+    }
+    a {
+      margin-right: 1em;
+    }
+    .github {
+      display: none;
+    }
+  }
 }
 </style>

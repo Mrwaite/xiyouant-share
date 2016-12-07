@@ -63,6 +63,16 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      //编译css并自动添加css前缀
+      {
+        test : /\.css$/, loader : 'style-loader!autoprefixer-loader!css-loader'
+      },
+      {
+        test : /\.scss$/, loader : 'css-loader!style-loader!sass-loader!node-sass'
+      },
+      {
+        test : /\.(html|tpl)$/, loader : 'html-loader'
       }
     ]
   },

@@ -34,13 +34,41 @@
         data () {
             return {
                 articles : [{
+                    id : null,
+                    score : null,
+                    url : null,
+                    title : null,
+                    time : null
+                }]
+            }
+        },
+        /*created () {
+            this.$http.get('http://localhost:3000/articles/' + this.$route.params.direction)
+                .then(function(ret) {
+                    this.articles = ret.data;
+            });  
+        }*/
+        beforeRouteEnter (to , from, next) {
+            next(vm => {
+                vm.articles = [{
                     id : '58401b8a747ab47118820af9',
                     score : '108',
                     url : 'http://baidu.com',
-                    title : '测试',
+                    title : '前端',
                     time : '16年11月6日'
-                }]
-            }
+                }];
+                /*vm.$http.get('http://localhost:3000/articles/' + vm.$route.params.direction)
+                    .then(function(ret) {
+                        vm.articles = ret.data;
+                    });  */
+            });
+            /*to.$http.get('http://localhost:3000/articles/' + to.params.direction)
+                .then(function(ret) {
+                    next(vm => {
+                        vm.articles = ret.data;
+                    });
+                    
+            });  */
         }
     }
 </script>

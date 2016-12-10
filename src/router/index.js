@@ -13,15 +13,32 @@ export default new Router({
             /*component (resolve) {
                 require(['../views/index/index.vue', resolve]);
             }*/
-            component : index
-        }/*,
+            components : {
+                main : index
+            }
+        },/*
         { 
             path : '/article/:id', 
             component: createArticle() 
-        }*/,
+        },*/
         {
             path : '/',
             redirect : '/path/fe'
+        },
+        {
+            name : 'login',
+            path : '/login',
+            components : {
+                login : login
+            }
+        },
+        {
+            name : 'signup',
+            path : '/signup',
+            components : {
+                login : signup
+            }
         }
+       
     ]
 });

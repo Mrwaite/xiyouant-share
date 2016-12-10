@@ -10,6 +10,9 @@ module.exports = function (app) {
   /*app.get('/', function(req, res){
     res.send('../../index.html');
   });*/
+  app.post('/login', function(req, res) {
+      
+  });
   app.get('/articles/:direction', function(req, res){
       var direction = req.params.direction;
       switch(direction) {

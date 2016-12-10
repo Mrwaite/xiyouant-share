@@ -6,6 +6,7 @@ import App from './App'
 import Home from './components/Home'
 
 import router from './router/index'
+import store from './store/'
 
 Vue.use(VueRouter);
 Vue.use(VueResource);

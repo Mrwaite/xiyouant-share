@@ -8,13 +8,13 @@
         <router-link to="/path/fe">前端</router-link>
         <router-link to="/path/safe">网络</router-link>
         <router-link to="/path/net">安全</router-link>
-        <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">
-          Built with Vue.js
-        </a>
+        <router-link class="github" to="/login">登录  </router-link>
+        <router-link class="github" to="/signup">  注册</router-link>
       </div>
     </div>
     <transition name="fade" mode="out-in">
-      <router-view class="view"></router-view>
+      <router-view class="view" name="main"></router-view>
+      <router-view class="view" name="login"></router-view>
     </transition>
   </div>
 </template>

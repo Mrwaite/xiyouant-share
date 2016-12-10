@@ -42,13 +42,25 @@
                 }]
             }
         },
-        /*created () {
-            this.$http.get('http://localhost:3000/articles/' + this.$route.params.direction)
-                .then(function(ret) {
-                    this.articles = ret.data;
-            });  
-        }*/
-        beforeRouteEnter (to , from, next) {
+        created () {
+            //组件穿件完成后获取数据
+            //此时data已被observed了
+            this.fetchData();
+        },
+        watch : {
+            //如果路由有变化,会再次执行该函数
+            '$route' : 'fetchData'
+        },
+        methods : {
+            fetchData () {
+                this.$http.get('http://localhost:3000/articles/' + this.$route.params.direction)
+                    .then(function(ret) {
+                        this.articles = ret.data;
+                    });  
+            }
+        }
+       /* beforeRouteEnter (to , from, next) {
+            console.log(to.params);
             next(vm => {
                 vm.articles = [{
                     id : '58401b8a747ab47118820af9',
@@ -57,19 +69,19 @@
                     title : '前端',
                     time : '16年11月6日'
                 }];
-                /*vm.$http.get('http://localhost:3000/articles/' + vm.$route.params.direction)
+                vm.$http.get('http://localhost:3000/articles/' + vm.$route.params.direction)
                     .then(function(ret) {
                         vm.articles = ret.data;
-                    });  */
+                    });  
             });
-            /*to.$http.get('http://localhost:3000/articles/' + to.params.direction)
+            to.$http.get('http://localhost:3000/articles/' + to.params.direction)
                 .then(function(ret) {
                     next(vm => {
                         vm.articles = ret.data;
                     });
                     
-            });  */
-        }
+            });  
+        }*/
     }
 </script>
 

@@ -8,26 +8,36 @@
         <router-link to="/path/fe">前端</router-link>
         <router-link to="/path/safe">网络</router-link>
         <router-link to="/path/net">安全</router-link>
-        <router-link class="github" to="/login">登录  </router-link>
-        <router-link class="github" to="/signup">  注册</router-link>
+        <div v-if="!loginStatus">
+          <router-link class="github" to="/login">登录  </router-link>
+          <router-link class="github" to="/signup">  注册</router-link>
+        </div>
+        <div v-if="loginStatus">
+          <span>{{username}}</span>
+          <router-link class="github" to="/postNew">  发表文章</router-link>
+        </div>
       </div>
     </div>
     <transition name="fade" mode="out-in">
-      <router-view class="view" name="main"></router-view>
+      <router-view class="view" ></router-view>
       <router-view class="view" name="login"></router-view>
     </transition>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import { mapState } from 'vuex'
 
 
 export default {
   name: 'app',
   components: {
     
-  }
+  },
+  computed: mapState({ 
+    loginStatus: state => state.loginStatus,
+    username: state => state.username
+   }),
 }
 </script>
 

@@ -3,10 +3,9 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 
 import App from './App'
-import Home from './components/Home'
 
 import router from './router/index'
-import store from './store/'
+import store from './store/index'
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -29,5 +28,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
+  store,
   ...App,
 })

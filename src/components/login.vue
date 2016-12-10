@@ -1,5 +1,5 @@
 <template>
-    <form class="login" @submit.prevent="submit">
+    <form class="login" v-on:submit.prevent="submit">
         <div class="line">
             <div>username不能为空</div>
             <input type="text" placeholder="用户名" v-model="form.username">
@@ -16,7 +16,7 @@
 
 <script>
     import { mapActions } from 'vuex'
-    import { USER_LOGIN } from '../store/user'
+    import { USER_LOGIN } from '../store/mutations-types'
 
 
     export default {
@@ -34,7 +34,8 @@
             submit () {
                 if(!this.form.username || !this.form.password) return
                 this.USER_LOGIN(this.form);
-                /*this.$router.replace({path : '/'});*/
+                this.$router.replace({ path: '/' })
+                
             }
         }
     }

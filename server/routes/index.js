@@ -11,7 +11,7 @@ module.exports = function (app) {
     res.send('../../index.html');
   });*/
   app.post('/login', function(req, res) {
-      
+      res.send('Mrwaite');
   });
   app.get('/articles/:direction', function(req, res){
       var direction = req.params.direction;

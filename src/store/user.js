@@ -1,19 +1,20 @@
 import Vue from 'vue'
 import * as types from './mutations-types'
-import user from '../api/user'
+/*import userapi from '../api/user'*/
 
 export default {
     state : {
         username : '',
         password : '',
-        loginStatus : null
+        loginStatus : false
     },
     getters : {
         loginStatus : state => state.loginStatus
     },
     //mutations只允许编写同步代码
     mutations : {
-        [types.USER_LOGIN] (state, user) {
+        [types.USER_LOGIN] (state, name) {
+            state.username = name
             
         },
         [types.USER_SIGNUP] (state, user) {
@@ -27,17 +28,19 @@ export default {
     //actions返回premise对象可以,让两个异步顺序执行
     actions : {
         [USER_LOGIN]({ commit }, info) {
-            user.login(info, (flag) => {
-                if(flag === '1') {
+            /*userapi.login(info, (name) => {
+                if(name) {
                     //说明数据库有该用户,登录成功
                     //设置session
                     state.loginStatus = true
-                } else if (flag === '2') {
+                } else if (!name) {
                     //说明数据库没有该用户,登录失败
                     state.loginStatus = false
                 }
-            })
-            commit(USER_LOGIN, user);
+                commit(USER_LOGIN, name);
+            })*/
+            state.loginStatus = true
+            commit(USER_LOGIN, info);
         },
         [USER_SIGNUP]({ commit }, user) {
             commit(USER_SIGNUP, user);

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '../views/index/index.vue'
+import login from '../components/login.vue'
+import signup from '../components/signup.vue'
 
 Vue.use(Router)
 
@@ -13,9 +15,7 @@ export default new Router({
             /*component (resolve) {
                 require(['../views/index/index.vue', resolve]);
             }*/
-            components : {
-                main : index
-            }
+            component : index
         },/*
         { 
             path : '/article/:id', 
@@ -25,7 +25,7 @@ export default new Router({
             path : '/',
             redirect : '/path/fe'
         },
-        {
+        /*{
             name : 'login',
             path : '/login',
             components : {
@@ -38,7 +38,7 @@ export default new Router({
             components : {
                 login : signup
             }
-        }
+        }*/
        
     ]
 });

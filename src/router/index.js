@@ -15,7 +15,9 @@ export default new Router({
             /*component (resolve) {
                 require(['../views/index/index.vue', resolve]);
             }*/
-            component : index
+            components : {
+                main : index
+            }
         },/*
         { 
             path : '/article/:id', 
@@ -25,7 +27,7 @@ export default new Router({
             path : '/',
             redirect : '/path/fe'
         },
-        /*{
+        {
             name : 'login',
             path : '/login',
             components : {
@@ -38,7 +40,7 @@ export default new Router({
             components : {
                 login : signup
             }
-        }*/
+        }
        
     ]
 });

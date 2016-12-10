@@ -27,8 +27,8 @@ export default {
     //actions可以编写异步代码,然后去commitmutations
     //actions返回premise对象可以,让两个异步顺序执行
     actions : {
-        [USER_LOGIN]({ commit }, info) {
-            /*userapi.login(info, (name) => {
+        [types.USER_LOGIN]({ commit }, info) {
+            userapi.login(info, (name) => {
                 if(name) {
                     //说明数据库有该用户,登录成功
                     //设置session
@@ -38,14 +38,14 @@ export default {
                     state.loginStatus = false
                 }
                 commit(USER_LOGIN, name);
-            })*/
-            state.loginStatus = true
-            commit(USER_LOGIN, info);
+            })
+            /*state.loginStatus = true
+            commit(USER_LOGIN, info);*/
         },
-        [USER_SIGNUP]({ commit }, user) {
+        [types.USER_SIGNUP]({ commit }, user) {
             commit(USER_SIGNUP, user);
         },
-        [USER_SIGNOUT]({ commit }, user) {
+        [types.USER_SIGNOUT]({ commit }, user) {
             commit(USER_SIGNOUT, user);
         }
     }

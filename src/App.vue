@@ -19,7 +19,7 @@
       </div>
     </div>
     <transition name="fade" mode="out-in">
-      <router-view class="view" ></router-view>
+      <router-view class="view" name="main"></router-view>
       <router-view class="view" name="login"></router-view>
     </transition>
   </div>

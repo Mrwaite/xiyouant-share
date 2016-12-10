@@ -9,7 +9,7 @@
             <input type="password" placeholder="密码" v-model="form.password">    
         </div>
         <div>{{ message }}</div>
-        <button type="submit">登录</button>
+        <button>登录</button>
     </form>
 </template>
 
@@ -35,7 +35,6 @@
                 if(!this.form.username || !this.form.password) return
                 this.USER_LOGIN(this.form);
                 this.$router.replace({ path: '/' })
-                
             }
         }
     }

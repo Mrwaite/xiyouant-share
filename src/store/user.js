@@ -19,8 +19,11 @@ export default {
         [types.USER_SIGNUP] (state, name) {
             state.username = name
         },
-        [types.USER_SIGNOUT] (state, user) {
-
+        [types.USER_SIGNOUT] (state) {
+            state.username = ''
+        },
+        [types.USER_CHECK] (state, name) {
+            state.username = name
         }
     },
     //actions可以编写异步代码,然后去commitmutations
@@ -55,8 +58,22 @@ export default {
             })
            /* commit(types.USER_SIGNUP, user);*/
         },
-        [types.USER_SIGNOUT]({ commit }, user) {
-            commit(types.USER_SIGNOUT, user);
+        [types.USER_SIGNOUT]({ commit }) {
+            userapi.signout(() => {
+                state.loginStatus = false
+                commit(types.USER_SIGNOUT);
+            })
+            
+        },
+        [types.USER_CHECK]({ commit }) {
+            userapi.check((res) => {
+                if(res.err) {
+                    state.loginStatus = false
+                } else if(res.success) {
+                    state.loginStatus = true
+                    commit(types.USER_CHECK, res.success)
+                }
+            })
         }
     }
 }

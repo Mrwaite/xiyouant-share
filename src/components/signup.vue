@@ -35,7 +35,7 @@
         methods: {
             ...mapActions([USER_SIGNUP]),
             submit () {
-                //if(!this.from.username || !this.from.password || !this.from.email) return 
+                if(!this.from.username || !this.from.password || !this.from.email) return 
                 this.USER_SIGNUP(this.form);
                 this.$router.replace({ path: '/' })
             }

@@ -27,13 +27,17 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { USER_CHECK } from './store/mutations-types'
 
 
 export default {
   name: 'app',
-  components: {
-    
+  created () {
+    this.$store.dispatch(USER_CHECK)
+    /*console.log(USER_CHECK);*/
+  },
+  components: {   
   },
   computed: mapState({ user: state => state.user }),
 }

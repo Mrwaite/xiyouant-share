@@ -10,6 +10,13 @@ import store from './store/index'
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+Vue.http.interceptors.push((request, next) => {
+    request.credentials = true
+    next()
+})
+
+/*Vue.http.options.xhr = {withCredentials: true}*/
+
 /*const routes = [{
   path : '/',
   component : Home

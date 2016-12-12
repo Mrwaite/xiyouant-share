@@ -22,6 +22,7 @@ module.exports = function (app) {
       //3.查看密码是否一致
       //4.都匹配的话把用户信息存入session,保存到数据库,给req.session字段填上session_id
       //5.返回用户的名字
+     /* res.header('Access-Control-Allow-Credentials', true);*/
       var md5 = crypto.createHash('md5'),
             password = md5.update(req.body.password).digest('hex');
       User.get(req.body.username, function(err, user){
@@ -41,6 +42,7 @@ module.exports = function (app) {
       //1.生成密码的md5值,创建用户数据对象
       //2.查看用户名是都存在
       //3.不存在,就存入数据库,并把用户信息存入session中
+      
         var username = req.body.username,
             password = req.body.password,
             email = req.body.email;
@@ -70,8 +72,17 @@ module.exports = function (app) {
         });
   });
   app.get('/signout', function (req, res) {
-      //1.擦除session
+        //1.擦除session
+        req.session.user = null;
+        res.json({ success : '登出成功' });//登出之后跳转到主界面
   });
+  app.get('/check', function (req, res) {
+        if(req.session.user){
+            res.josn({ success : req.session.user.username });
+        } else {
+            res.json({ err : '未登录' });
+        }
+  })
   app.get('/articles/:direction', function(req, res){
       var direction = req.params.direction;
       switch(direction) {

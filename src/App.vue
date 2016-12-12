@@ -8,13 +8,14 @@
         <router-link to="/path/fe">前端</router-link>
         <router-link to="/path/safe">网络</router-link>
         <router-link to="/path/net">安全</router-link>
-        <div v-if="!loginStatus">
-          <router-link class="github" to="/login">登录  </router-link>
-          <router-link class="github" to="/signup">  注册</router-link>
+        <div v-if="!user.loginStatus" class="userinfo">
+          <router-link to="/login">登录</router-link>
+          <router-link to="/signup">注册</router-link>
         </div>
-        <div v-if="loginStatus">
-          <span>{{username}}</span>
-          <router-link class="github" to="/postNew">  发表文章</router-link>
+        <div v-if="user.loginStatus" class="userinfo">
+          <div class="username">{{user.username}}</div>
+          <router-link to="/postNew">发表文章</router-link>
+          <router-link to="/signout">登出</router-link>
         </div>
       </div>
     </div>
@@ -34,10 +35,7 @@ export default {
   components: {
     
   },
-  computed: mapState({ 
-    loginStatus: state => state.loginStatus,
-    username: state => state.username
-   }),
+  computed: mapState({ user: state => state.user }),
 }
 </script>
 
@@ -86,6 +84,10 @@ a {
     &:hover {color: #fff;}
     &:router-link-active {color: #fff;font-weight: 400;}
     &::nth-child(6) {margin-right: 0}
+    &.router-link-active{
+          color: #fff;
+          font-weight: 800;
+    }
   }
   .github{
     color: #fff;
@@ -93,7 +95,20 @@ a {
     margin: 0;
     float: right;
   }
-
+  .userinfo{
+    display: inline-block;
+    float: right;
+  }
+  .username{
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 24px;
+    transition: color 0.15s ease;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 300px;
+    letter-spacing: 0.075em;
+    margin-right: 1.8em;
+  }
 }
 
 .logo {

@@ -8,6 +8,10 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var setting = require('./config/db.js');
+var session = require('express-session');
+var MongoStore = require('connect-mongo/es5')(session);
+
 var app = express();
 
 //cors模块,允许跨域
@@ -17,6 +21,9 @@ var cors = require('cors');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//设置session,并存储在mongoDB
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -24,6 +31,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret : setting.cookieSercet,
+  key : setting.db,
+  cookie : {maxAge: 1000 * 60 * 60 * 24 *1}, //一天
+  resave : true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    url: 'mongodb://localhost/xiyouant-share'
+  })
+}));
 
 app.use(cors());
 

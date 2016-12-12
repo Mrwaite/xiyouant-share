@@ -7,8 +7,17 @@ export default {
             'http://localhost:3000/login',
             info
         ).then((response) => {
+            /*console.log(response.body);*/
             callback(response.body);
         });
     },
-
+    signup (info, callback) {
+        Vue.http.post(
+            'http://localhost:3000/signup',
+            info
+        ).then((response) => {
+            console.log(response.body);
+            callback(response.body);
+        })
+    }
 }

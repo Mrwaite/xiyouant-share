@@ -27,24 +27,23 @@ export default {
     //actions返回premise对象可以,让两个异步顺序执行
     actions : {
         [types.USER_LOGIN]({ commit, state }, info) {
-            userapi.login(info, (name) => {
-                console.log(name)
-                if(name) {
-                    //说明数据库有该用户,登录成功
-                    //设置session
-                    state.loginStatus = true
-                } else if (!name) {
-                    //说明数据库没有该用户,登录失败
+            userapi.login(info, (res) => {
+                /*console.log(name)*/
+                if(res.err) {
+                    res.err === "用户不存在" ? console.log('用户不存在') : console.log('密码错误')
                     state.loginStatus = false
-                }
-                commit(types.USER_LOGIN, name);
+                } else if (res.success) {
+                    //说明数据库没有该用户,登录失败
+                    state.loginStatus = true
+                    commit(types.USER_LOGIN, res.success);
+                }              
             })
             /*state.loginStatus = true
             commit(USER_LOGIN, info);*/
         },
         [types.USER_SIGNUP]({ commit, state }, info) {
             userapi.signup(info, (res) => {
-                console.log(res);
+                /*console.log(res);*/
                 if (res.err) {
                     console.log(res.err);
                     state.loginStatus = false

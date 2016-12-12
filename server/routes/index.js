@@ -22,24 +22,20 @@ module.exports = function (app) {
       //3.查看密码是否一致
       //4.都匹配的话把用户信息存入session,保存到数据库,给req.session字段填上session_id
       //5.返回用户的名字
-      /*var md5 = crypto.createHash('md5'),
+      var md5 = crypto.createHash('md5'),
             password = md5.update(req.body.password).digest('hex');
       User.get(req.body.username, function(err, user){
           if(!user){
-              req.flash('error','用户名不存在');
-              return res.redirect('/login');//用户不存在跳转到登陆页面
+              return res.json({ err : '用户不存在' });//用户不存在跳转到登陆页面
           }
           //检查密码是否一致
           if(user.password !== password ){
-              req.flash('error', '密码错误！');
-              return res.redirect('/login');//密码错误跳转到登陆界面
+              return res.json({ err : '密码错误' });//密码错误跳转到登陆界面
           }
           //用户名和密码都匹配后，将用户信息存入session
           req.session.user = user;
-          req.flash('success','登陆成功');
-          res.redirect('/');
-      });*/
-      res.send('Mrwaite');
+          res.json({ success : user.username });
+      });
   });
   app.post('/signup', function (req, res) {
       //1.生成密码的md5值,创建用户数据对象
@@ -57,18 +53,18 @@ module.exports = function (app) {
         });
         User.get(newUser.username, function(err, user){
             if(err){
-                return res.send({ err : 'err: ' + err });
+                return res.json({ err : 'err: ' + err });
             }
             if(user){
-                return res.send({ err : 'err: 用户已存在' });//如果用户名不存在，返回注册页面
+                return res.json({ err : 'err: 用户已存在' });//如果用户名不存在，返回注册页面
             }
             //把用户信息存储到session里，以后就可以通过req.session.user读取用户信息
             newUser.save(function(err, user){
                 if(err){
-                    return res.send({ err : 'err: ' + err });//注册失败返回注册页
+                    return res.json({ err : 'err: ' + err });//注册失败返回注册页
                 }
                 req.session.user = newUser;
-                res.send({ success : newUser.username });
+                res.json({ success : newUser.username });
             });
 
         });

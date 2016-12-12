@@ -12,11 +12,12 @@ export default {
         });
     },
     signup (info, callback) {
+        /*console.log(info);*/
         Vue.http.post(
             'http://localhost:3000/signup',
             info
         ).then((response) => {
-            console.log(response.body);
+            /*console.log(response.body);*/
             callback(response.body);
         })
     }

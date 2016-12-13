@@ -27,9 +27,9 @@ export default {
     },
     signout (callback) {
         Vue.http.get(
-            'http://localhost:3000/singout'
+            'http://localhost:3000/signout'
         ).then((response) => {
-            callback();
+            callback()
         })
     },
     check (callback) {
@@ -38,5 +38,13 @@ export default {
         ).then((response) => {
             callback(response.body)
         })
+    },
+    postNew (topic, callback) {
+        Vue.http.post(
+            'http://localhost:3000/postNew',
+            topic
+            ).then((response) => {
+                callback(response.body)
+            })
     }
 }

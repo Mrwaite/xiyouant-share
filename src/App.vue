@@ -35,7 +35,6 @@ export default {
   name: 'app',
   created () {
     this.$store.dispatch(USER_CHECK)
-    /*console.log(USER_CHECK);*/
   },
   components: {   
   },

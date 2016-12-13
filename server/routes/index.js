@@ -78,7 +78,7 @@ module.exports = function (app) {
   });
   app.get('/check', function (req, res) {
         if(req.session.user){
-            res.josn({ success : req.session.user.username });
+            res.json({ success : req.session.user.username });
         } else {
             res.json({ err : '未登录' });
         }

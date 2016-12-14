@@ -3,7 +3,7 @@
         <div class="news-list">
             <ul>
                 <li v-for="item in articles" class="news-item">
-                    <span class="score">{{ item.score }}</span>
+                    <span class="score">{{ item.pv }}</span>
                     <span class="title">
                     <template v-if="item.url">
                         <a :href="item.url" target="_blank">{{ item.title }}</a>
@@ -35,7 +35,7 @@
             return {
                 articles : [{
                     id : null,
-                    score : null,
+                    pv : null,
                     url : null,
                     title : null,
                     time : null

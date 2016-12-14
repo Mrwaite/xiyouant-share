@@ -1,13 +1,13 @@
 //创建与数据库的链接
-var mongodb = require('./db'),
+var mongodb = require('./createDB'),
     markdown = require("markdown").markdown;//markdown模块
 
-function Post(name, head, title, tags, post){
-    this.name = name;
+function Post({ username, type, title, content, tags }){
+    this.username = username;
+    this.type = type;
     this.title = title;
-    this.post = post;
+    this.content = content;
     this.tags = tags;
-    this.head = head;
 }
 
 module.exports = Post;
@@ -27,15 +27,14 @@ Post.prototype.save = function(callback){
 
     //要存入数据库的文档
     var post ={
-        name : this.name,
+        username : this.username,
         time : time,
         title : this.title,
-        post : this.post,
+        content : this.content,
         comments : [],
         tags : this.tags,
         pv : 0,
-        head : this.head,
-        reprint_info : {}
+        type : this.type
     };
     //打开数据库
     mongodb.open(function(err, db){
@@ -43,7 +42,8 @@ Post.prototype.save = function(callback){
             return callback(err);
         }
         //读取数据库
-        db.collection('posts', function(err, collection){
+        //fe,safe,net三个表
+        db.collection(post.type, function(err, collection){
             if(err){
                 mongodb.close();
                 return callback(err);
@@ -62,14 +62,14 @@ Post.prototype.save = function(callback){
 
 
 //获取name 的所有文章，或者获取全部人的文章，参数为null
-Post.getTen = function(name, page, callback){
+Post.getTen = function(name, page, type, callback){
     //打开数据库
     mongodb.open(function(err, db){
         if(err){
             return callback(err);
         }
         //读取posts集合
-        db.collection('posts', function(err, collection){
+        db.collection(type, function(err, collection){
             if(err){
                 mongodb.close();
                 return callback(err);
@@ -105,7 +105,7 @@ Post.getTen = function(name, page, callback){
                     }
                     //解析markdown为html文档
                     docs.forEach(function(doc){
-                        doc.post = markdown.toHTML(doc.post);
+                        doc.content = markdown.toHTML(doc.content);
                     });
                     callback(null, docs, total);
                 });

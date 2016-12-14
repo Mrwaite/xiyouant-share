@@ -19,6 +19,9 @@
         </div>
       </div>
     </div>
+    <div id="alertMessage">
+      {{alertMessage}}
+    </div>
     <transition name="fade" mode="out-in">
       <router-view class="view" name="main"></router-view>
       <router-view class="view" name="login"></router-view>
@@ -38,7 +41,10 @@ export default {
   },
   components: {   
   },
-  computed: mapState({ user: state => state.user }),
+  computed: mapState({ 
+    user: state => state.user,
+    alertMessage: state => state.alertMessage 
+  }),
 }
 </script>
 
@@ -60,6 +66,13 @@ a {
   color : $base_color;
   text-decoration : none;
 }
+
+#alertMessage {
+  position: absolute;
+  right: 0;
+  top: 200px;
+}
+
 
 .header {
   background-color: $base_backgroundColor;

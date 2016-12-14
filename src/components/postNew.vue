@@ -7,8 +7,9 @@
                 <option value="net">网络</option>             
         </select>
         <textarea name="title" id="" placeholder="填写标题" rows="1" v-model="topic.title"></textarea>
+        <textarea name="tags" id="" placeholder="标签(多标签用,隔开)" rows="1" v-model="topic.tags"></textarea>
         <textarea name="content" id="" cols="30" rows="10" v-model="topic.content" placeholder="允许使用markdwon语法"></textarea>
-        <button @click="submit"></button>
+        <button @click="submit">发布</button>
     </div>
 </template>
 
@@ -23,7 +24,8 @@ export default {
             topic : {
                 type : 'fe',
                 title : '',
-                content : ''
+                content : '',
+                tags : ''
             }
         }
     },

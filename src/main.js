@@ -7,8 +7,15 @@ import App from './App'
 import router from './router/index'
 import store from './store/index'
 
+import * as filters from './filters/index'
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
+
+
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 Vue.http.interceptors.push((request, next) => {
     request.credentials = true

@@ -85,40 +85,68 @@ module.exports = function (app) {
   })
   app.get('/articles/:direction', function(req, res){
       var direction = req.params.direction;
-      switch(direction) {
+      /*switch(direction) {
         case 'fe' : res.json([{
                     id : '58401b8a747ab47118820af9',
-                    score : '108',
+                    pv : '108',
                     url : 'http://baidu.com',
                     title : '前端',
-                    time : '16年11月6日'
+                    time : '1481733471'
                 }]);
                 break;
         case 'safe' :
                     res.json([{
                               id : '58401b8a747ab47118820af9',
-                              score : '108',
+                              pv : '108',
                               url : 'http://baidu.com',
                               title : '安全',
-                              time : '16年11月6日'
+                              time : '1481733471'
                     }]); 
                     break;
         case 'net' :
                     res.json([{
                               id : '58401b8a747ab47118820af9',
-                              score : '108',
+                              pv : '108',
                               url : 'http://baidu.com',
                               title : '网络',
-                              time : '16年11月6日'
+                              time : '1481733431'
                     }]);  
                     break;
         default: 
           break;
-      }
+      }*/
+        Post.getTen(null, 1, direction, function(err, posts, total){
+            if(err){
+                post = [];
+            }
+            res.json(posts)
+        });
   });
   app.post('/postNew', function (req, res) {
       //1.读取当前登录用户的session信息
-      //2.读取提交文章的title,tags,文章内容
+      //2.传入name : this.name,
+      //  time : time,
+      //  title : this.title,
+      //  post : this.post,
+      //  comments : [],
+      //  tags : this.tags,
+      //  pv : 0,
       //3.保存
+        const currentUser = req.session.user;
+        const tags = String(req.body.tags).split(',');
+        const info = {
+                username : currentUser.username,
+                type : req.body.type,
+                title : req.body.title,
+                content : req.body.content,
+                tags : tags
+            };
+        const post = new Post(info);
+        post.save(function(err){
+            if(err){
+                return res.json({ err : err });
+            }
+            res.json({ success : '发布成功' });//发布成功跳转到主页
+        });
   })
 };

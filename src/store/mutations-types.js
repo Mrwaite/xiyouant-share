@@ -6,3 +6,5 @@ export const USER_CHECK = 'USER_CHECK'
 
 export const USER_POSTNEW = 'USER_POSTNEW'
 
+export const ARTICLES_SAVE = 'ARTICLES_SAVE'
+

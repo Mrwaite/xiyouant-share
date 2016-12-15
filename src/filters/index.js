@@ -6,7 +6,8 @@ export function host (url) {
 }
 
 export function timeAgo (time) {
-  const between = Date.now() / 1000 - Number(time)
+  //方法返回自1970年1月1日 00:00:00 UTC到当前时间的毫秒数。
+  const between = (new Date() - new Date(time)) / 1000
   if (between < 3600) {
     return pluralize(~~(between / 60), ' minute')
   } else if (between < 86400) {

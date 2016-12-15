@@ -11,7 +11,7 @@ import ArticleList from '../../components/ArticleList'
 export default {
     data () {
         return {
-
+            
         }
     },
     created () {

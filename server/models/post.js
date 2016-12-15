@@ -94,8 +94,8 @@ Post.getTen = function(name, page, type, callback){
             collection.count(query, function(err, total){
                //根据query对象查询， 并跳过前面（page-1）*10 个结果，返回之后的10个结果
                 collection.find(query, {
-                    skip : (page - 1)*10,
-                    limit : 10
+                    skip : (page - 1)*15,
+                    limit : 15
                 }).sort({
                     time : -1
                 }).toArray(function(err, docs){
@@ -115,23 +115,21 @@ Post.getTen = function(name, page, type, callback){
 };
 
 //根据name。day，title来精准的获取一篇文章
-Post.getOne = function(name, day, title, callback){
+Post.getOne = function(type, _id, callback){
     //打开数据库
     mongodb.open(function(err, db){
         if(err){
             return callback(err);
         }
         //读取post集合
-        db.collection('posts', function(err, collection){
+        db.collection(type, function(err, collection){
             if(err){
                 mongodb.close();
                 return callback(err);
             }
             //根据用户名，发表日期，文章名来查询
             collection.findOne({
-                "name" : name,
-                "time.day" : day,//这个是查询time对面下面的day
-                "title" : title
+                "_id" : ObjectId(_id)
             }, function(err, doc){
 
                 if(err){
@@ -143,9 +141,7 @@ Post.getOne = function(name, day, title, callback){
                 if(doc){
                     //每访问一次， pv值就加一
                     collection.update({
-                        "name" : name ,
-                        "time.day" : day,
-                        "title" : title
+                        "_id" : ObjectId(_id)
                     }, {
                         $inc : {"pv" : 1}
                     }, function (err) {
@@ -154,7 +150,7 @@ Post.getOne = function(name, day, title, callback){
                             return callback(err);
                         }
                     });
-                    doc.post = markdown.toHTML(doc.post);
+                    doc.content = markdown.toHTML(doc.content);
                     doc.comments.forEach(function(comment){
                         comment.content = markdown.toHTML(comment.content);
                     });

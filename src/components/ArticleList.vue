@@ -1,28 +1,35 @@
 <template>
-    <div class="news-view">
+    <div class="news-view view">
+        <div class="news-list-nav">
+            <router-link v-if="page > 1" :to="'/path/' + type + '/' + (page - 1)">&lt; prev</router-link>
+            <a v-else class="disabled">&lt; prev</a>
+            <span>{{ page }}/{{ maxPage }}</span>
+            <router-link v-if="page < maxPage" :to="'/' + type + '/' + (page + 1)">more &gt;</router-link>
+            <a v-else class="disabled">more &gt;</a>
+        </div>
         <div class="news-list">
             <ul>
-                <li v-for="item in articles" class="news-item">
-                    <span class="score">{{ item.pv }}</span>
+                <li v-for="article in articles" class="news-item">
+                    <span class="score">{{ article.pv }}</span>
                     <span class="title">
-                    <template v-if="item.url">
-                        <a :href="item.url" target="_blank">{{ item.title }}</a>
-                        <span class="host">({{ item.url | host }})</span>
-                    </template>
-                    <template v-else>
-                        <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
-                    </template>
+                        <template v-if="article.url"><!--转载-->
+                            <a :href="article.url" target="_blank">{{ article.title }}</a>
+                            <span class="host">({{ article.url | host }})</span>
+                        </template>
+                        <template v-else><!--原创-->
+                            <router-link :to="'/article/' + article.type + '/' + article._id">{{ article.title }}</router-link>
+                        </template>
                     </span>
                     <br>
                     <span class="meta">
                         <span class="time">
-                            {{ item.time | timeAgo }} ago
+                            {{ article.time.date | timeAgo }} ago
                         </span>
-                        <span v-if="item.type !== 'job'" class="comments-link">
-                            | <router-link :to="'/item/' + item.id">{{ item.descendants }} comments</router-link>
+                        <span class="comments-link">
+                            | <router-link :to="'/article/' + article._id">{{ article.comments.length }} 评论</router-link>
                         </span>
                     </span>
-                    <span class="label" v-if="item.type !== 'story'">{{ item.type }}</span>
+                    <span v-for="tag in article.tags" class="tags">{{ tag }}</span>
                 </li>
             </ul>
         </div>   
@@ -30,15 +37,26 @@
 </template>
 
 <script>
+
+    import { mapActions } from 'vuex'
+    import { ARTICLES_SAVE } from '../store/mutations-types'
+
     export default {
         data () {
             return {
+                page: 0,
+                maxPage: 0,
+                type: this.$route.params.direction,
                 articles : [{
-                    id : null,
-                    pv : null,
-                    url : null,
-                    title : null,
-                    time : null
+                    _id : '',
+                    comments : [],
+                    content: '',
+                    pv : 0,
+                    tags: [],
+                    time: '',
+                    title: '',
+                    type: '',
+                    username: ''
                 }]
             }
         },
@@ -52,36 +70,19 @@
             '$route' : 'fetchData'
         },
         methods : {
+            ...mapActions([ARTICLES_SAVE]),
             fetchData () {
-                this.$http.get('http://localhost:3000/articles/' + this.$route.params.direction)
-                    .then(function(ret) {
-                        this.articles = ret.data;
+                this.$http.get('http://localhost:3000/articles/' + this.$route.params.direction + '/' + this.$route.params.page)
+                    .then(function(response) {
+                        /*this.type = this.$route.params.direction;*/
+                        this.articles = response.body.posts;
+                        this.ARTICLES_SAVE(this.articles);
+                        this.page = Number(response.body.page);
+                        this.maxPage = Number(response.body.maxPage);
+                        this.type = response.body.direction;
                     });  
             }
         }
-       /* beforeRouteEnter (to , from, next) {
-            console.log(to.params);
-            next(vm => {
-                vm.articles = [{
-                    id : '58401b8a747ab47118820af9',
-                    score : '108',
-                    url : 'http://baidu.com',
-                    title : '前端',
-                    time : '16年11月6日'
-                }];
-                vm.$http.get('http://localhost:3000/articles/' + vm.$route.params.direction)
-                    .then(function(ret) {
-                        vm.articles = ret.data;
-                    });  
-            });
-            to.$http.get('http://localhost:3000/articles/' + to.params.direction)
-                .then(function(ret) {
-                    next(vm => {
-                        vm.articles = ret.data;
-                    });
-                    
-            });  
-        }*/
     }
 </script>
 
@@ -93,6 +94,29 @@
 .news-list-nav, .news-list{
     background-color: #fff;
     border-radius: 2px;
+}
+
+.view{
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.news-list-nav{
+    padding: 15px 30px;
+    position: fixed;
+    text-align: center;
+    top: 55px;
+    left: 0;
+    right: 0;
+    z-index: 998;
+    box-shadow: 0 1px 2px rgab(0,0,0,.1);
+    a{
+        margin: 0 1em;
+    }
+    .disabled{
+        color: #ccc;
+    }
 }
 
 .news-list{

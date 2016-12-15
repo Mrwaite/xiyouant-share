@@ -5,9 +5,9 @@
         <router-link to="/" exact>
           <img class="logo" src="./assets/logo.png" alt="logo">
         </router-link>
-        <router-link to="/path/fe">前端</router-link>
-        <router-link to="/path/safe">网络</router-link>
-        <router-link to="/path/net">安全</router-link>
+        <router-link to="/path/fe/1">前端</router-link>
+        <router-link to="/path/safe/1">网络</router-link>
+        <router-link to="/path/net/1">安全</router-link>
         <div v-if="!user.loginStatus" class="userinfo">
           <router-link to="/login">登录</router-link>
           <router-link to="/signup">注册</router-link>
@@ -53,7 +53,7 @@ $base_backgroundColor : #42b983;
 $base_fontSize : 15px;
 $base_color : #34495e;
 body {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", Arial, Verdana, 'Open Sans', sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", Arial, Verdana, 'Open Sans', sans-serif;
   font-size : $base_fontSize;
   background-color : #f2f3f5;
   margin : 0;

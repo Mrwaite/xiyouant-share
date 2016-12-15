@@ -83,43 +83,17 @@ module.exports = function (app) {
             res.json({ err : '未登录' });
         }
   })
-  app.get('/articles/:direction', function(req, res){
-      var direction = req.params.direction;
-      /*switch(direction) {
-        case 'fe' : res.json([{
-                    id : '58401b8a747ab47118820af9',
-                    pv : '108',
-                    url : 'http://baidu.com',
-                    title : '前端',
-                    time : '1481733471'
-                }]);
-                break;
-        case 'safe' :
-                    res.json([{
-                              id : '58401b8a747ab47118820af9',
-                              pv : '108',
-                              url : 'http://baidu.com',
-                              title : '安全',
-                              time : '1481733471'
-                    }]); 
-                    break;
-        case 'net' :
-                    res.json([{
-                              id : '58401b8a747ab47118820af9',
-                              pv : '108',
-                              url : 'http://baidu.com',
-                              title : '网络',
-                              time : '1481733431'
-                    }]);  
-                    break;
-        default: 
-          break;
-      }*/
-        Post.getTen(null, 1, direction, function(err, posts, total){
+  app.get('/articles/:direction/:page', function(req, res){
+        var direction = req.params.direction;
+        var page = req.params.page;
+        Post.getTen(null, page, direction, function(err, posts, total){
             if(err){
-                post = [];
+                return res.json({ err: err })
             }
-            res.json(posts)
+            if(total === 0){
+                page = 0;
+            }
+            res.json({ posts: posts, maxPage: Math.ceil(total / 15), page: page, direction: direction})
         });
   });
   app.post('/postNew', function (req, res) {
@@ -148,5 +122,15 @@ module.exports = function (app) {
             }
             res.json({ success : '发布成功' });//发布成功跳转到主页
         });
+  });
+  app.get('/article/:type/:_id', (req, res) => {
+      const _id = req.params._id;
+      const type = req.params.type;
+      Post.getOne(type, _id, (err, doc) => {
+          if(err) {
+              return res.json({ err: err })
+          }
+          res.json({ article: doc })
+      })
   })
 };

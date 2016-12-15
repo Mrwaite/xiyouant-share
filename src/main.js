@@ -9,6 +9,8 @@ import store from './store/index'
 
 import * as filters from './filters/index'
 
+/*import './public/stylesheets/font.css'*/
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 

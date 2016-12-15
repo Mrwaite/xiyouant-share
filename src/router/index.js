@@ -5,6 +5,7 @@ import login from '../components/login.vue'
 import signup from '../components/signup.vue'
 import signout from '../components/signout.vue'
 import postNew from '../components/postNew.vue'
+import article from '../views/index/article.vue'
 
 Vue.use(Router)
 
@@ -13,21 +14,17 @@ export default new Router({
     routes : [
         {
             name : 'direction', 
-            path : '/path/:direction', 
+            path : '/path/:direction/:page', 
             /*component (resolve) {
                 require(['../views/index/index.vue', resolve]);
             }*/
             components : {
                 main : index
             }
-        },/*
-        { 
-            path : '/article/:id', 
-            component: createArticle() 
-        },*/
+        },
         {
             path : '/',
-            redirect : '/path/fe'
+            redirect : '/path/fe/1'
         },
         {
             name : 'login',
@@ -55,6 +52,13 @@ export default new Router({
             path : '/postNew',
             components :　{
                 login : postNew
+            }
+        },
+        {
+            name : 'article',
+            path: '/article/:direction/:_id',
+            components:{
+                main: article
             }
         }
        

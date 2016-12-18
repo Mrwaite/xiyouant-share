@@ -6,8 +6,8 @@
           <img class="logo" src="./assets/logo.png" alt="logo">
         </router-link>
         <router-link to="/path/fe/1">前端</router-link>
-        <router-link to="/path/safe/1">网络</router-link>
-        <router-link to="/path/net/1">安全</router-link>
+        <router-link to="/path/net/1">网络</router-link>
+        <router-link to="/path/safe/1">安全</router-link>
         <div v-if="!user.loginStatus" class="userinfo">
           <router-link to="/login">登录</router-link>
           <router-link to="/signup">注册</router-link>

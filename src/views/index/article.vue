@@ -1,11 +1,11 @@
 <template>
     <div class="article">
         <h2>{{ title }}</h2>
-        <lable class="username">{{ username }}</lable>
-        <lable v-for=""></lable>
-        <lable class="time">{{ time }}</lable>
+        <span class="username">{{ username }}</span>
+        <span v-for=""></span>
+        <span class="time">{{ time }}</span>
         <div>{{ content }}</div>
-        <lable v-for="comment in comments">{{ comment }}</lable>
+        <span v-for="comment in comments">{{ comment }}</span>
         
     </div>
 </template>
@@ -25,7 +25,7 @@
                     type: ''                              
             }
         },
-        create () {
+        created () {
             this.fetchArticle();
         },
         watch : {
@@ -37,8 +37,12 @@
                 var type = this.$route.params.direction
                 var articles = this.$store.state.articles
                 articles.forEach((article, index) => {
-                    if(_id === article._id) { 
-                        return  this.$data = article                        
+                    if(_id === article._id) {
+                        console.log(article) 
+                        Object.keys(article).forEach((key) => {
+                            this[key] = article[key];
+                        })
+                        return                     
                     } 
                 })
                 this.$http.get('http://localhost:3000/article/' + type + '/' + _id)

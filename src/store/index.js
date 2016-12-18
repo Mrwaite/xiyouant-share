@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     strict : false,//在生产环境下面不要用严格模式,严格模式是state的改变只能是mutations
-    state : {
+    state : { 
         alertMessage : '',
         articles: []
     },
@@ -23,7 +23,7 @@ export default new Vuex.Store({
     actions: {
         [types.ARTICLES_SAVE] ({ commit, state }, articles) {
             state.articles = articles;
-            commit(types.ARTICLE_SAVE);
+            commit(types.ARTICLES_SAVE);
         }
     }
 })

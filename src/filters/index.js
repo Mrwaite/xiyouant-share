@@ -7,13 +7,16 @@ export function host (url) {
 
 export function timeAgo (time) {
   //方法返回自1970年1月1日 00:00:00 UTC到当前时间的毫秒数。
-  const between = (new Date() - new Date(time)) / 1000
+  const getTime = new Date(time)
+  const between = (new Date() - getTime) / 1000
   if (between < 3600) {
     return pluralize(~~(between / 60), ' minute')
   } else if (between < 86400) {
     return pluralize(~~(between / 3600), ' hour')
-  } else {
+  } else if (between < 2592000) {
     return pluralize(~~(between / 86400), ' day')
+  } else {
+    return getTime.getFullYear() + "-" + getTime.getMonth() + 1 + "-" + getTime.getDate()
   }
 }
 

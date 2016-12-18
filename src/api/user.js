@@ -46,5 +46,13 @@ export default {
             ).then((response) => {
                 callback(response.body)
             })
+    },
+    commentSave (content, _id, type, callback) {
+        Vue.http.post(
+            'http://localhost:3000/commentSave/' + type + '/' + _id,
+            {content: content}
+        ).then((response) => {
+            callback(response.body)
+        })
     }
 }

@@ -2,6 +2,8 @@
 var mongodb = require('./createDB'),
     markdown = require("markdown").markdown;//markdown模块
 
+var ObjectId = require('mongodb').ObjectID;
+
 function Post({ username, type, title, content, tags }){
     this.username = username;
     this.type = type;

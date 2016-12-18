@@ -27,6 +27,9 @@ export default {
         },
         [types.USER_POSTNEW] (state, name) {
         
+        },
+        [types.COMMENT_SAVE] (state, name) {
+
         }
     },
     //actions可以编写异步代码,然后去commitmutations
@@ -91,6 +94,18 @@ export default {
                     console.log(res.success)
                     commit(types.USER_POSTNEW)
                 }                
+            })
+        },
+        [types.COMMENT_SAVE]({ commit, state, rootState }, {content, _id, type}) {
+            console.log('commentSave')
+            userapi.commentSave(content, _id, type, (res) => {
+                if(res.err) {
+                    rootState.alertMessage = res.err
+                } else if (res.success) {
+                    rootState.alertMessage = res.success
+                    console.log(res.success)
+                    commit(types.COMMENT_SAVE)
+                }
             })
         }
     }

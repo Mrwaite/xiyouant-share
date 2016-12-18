@@ -132,5 +132,23 @@ module.exports = function (app) {
           }
           res.json({ article: doc })
       })
+  }),
+  app.post('/commentSave/:type/:_id', (req, res) => {
+      const username = req.session.user.username
+      const date = new Date()
+      const comment = {
+          _id: req.params._id,
+          username: username,
+          time: date,
+          content: req.body.content,
+          type: req.params.type
+      }
+      const newComment = new Comment(comment)
+      newComment.save((err) => {
+          if(err) {
+              return res.json({ err: err })
+          }
+          res.json({ success: '评论成功' })
+      })
   })
 };

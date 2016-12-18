@@ -26,7 +26,7 @@
                             {{ article.time.date | timeAgo }} ago
                         </span>
                         <span class="comments-link">
-                            | <router-link :to="'/article/' + article._id">{{ article.comments.length }} 评论</router-link>
+                            |{{ article.comments.length }} 评论
                         </span>
                     </span>
                     <span v-for="tag in article.tags" class="tags">{{ tag }}</span>

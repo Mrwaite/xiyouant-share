@@ -34,7 +34,7 @@
             submit () {
                 if(!this.form.username || !this.form.password) return
                 this.USER_LOGIN(this.form);
-                this.$router.replace({ path: '/' })
+                this.$router.go(-1)
             }
         }
     }

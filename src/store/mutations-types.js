@@ -8,3 +8,5 @@ export const USER_POSTNEW = 'USER_POSTNEW'
 
 export const ARTICLES_SAVE = 'ARTICLES_SAVE'
 
+export const COMMENT_SAVE = 'COMMENT_SAVE'
+

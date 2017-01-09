@@ -10,7 +10,7 @@
         <div class="news-list">
             <ul>
                 <li v-for="article in articles" class="news-item">
-                    <span class="score">{{ article.pv }}</span>
+                    <span class="score" title="点击量">{{ article.pv }}</span>
                     <span class="title">
                         <template v-if="article.url"><!--转载-->
                             <a :href="article.url" target="_blank">{{ article.title }}</a>
@@ -20,14 +20,16 @@
                             <router-link :to="'/article/' + article.type + '/' + article._id">{{ article.title }}</router-link>
                         </template>
                     </span>
+                    <span class="author" titile="作者">
+                           @ {{ article.username }} 
+                        </span>
                     <br>
                     <span class="meta">
-                        <span class="time">
+                        <span class="time" title="发表时间">
                             {{ article.time.date | timeAgo }} ago
                         </span>
-                        <span class="comments-link">
-                            |{{ article.comments.length }} 评论
-                        </span>
+                         • 
+                        <span class="comment" title="评论"><span>{{ article.comments.length }}</span> comments</span>                        
                     </span>
                     <span v-for="tag in article.tags" class="tags">{{ tag }}</span>
                 </li>
@@ -192,6 +194,40 @@
                 color: #42b983;
             }
         }
+    }
+}
+
+.author{
+    float: right;
+    font-size: 10px;
+    color: #42b983;
+}
+
+.comment{
+    align-items: center;
+    margin: 0 .25em;
+    padding: 0em .5em;
+    /* height: 15px; */
+    font-size: 10px;
+    letter-spacing: .01em;
+    border-radius: 1px;
+    background-color: #f2f3f5;
+    transition: all .3s;
+}
+
+.tags{
+    float: right;
+    font-size: 10px;
+    align-items: center;
+    margin: 0 .25em;
+    margin-top: .3sem;
+    padding: 0em .5em;
+    background-color: #f2f3f5;
+    span{
+        padding: 0em .5em;
+        background-color: white;
+        color: black;
+        border-radius: 50%;
     }
 }
 </style>

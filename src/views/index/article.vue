@@ -1,5 +1,6 @@
 <template>
     <div class="article">
+       
         <h2>{{ title }}</h2>
         <span class="username">{{ username }}</span>
         <span v-for="tag in tags">{{ tag }}</span>
@@ -16,8 +17,7 @@
         <div>
             评论区:<comment :articleId="this.$route.params._id" :type="this.$route.params.direction" v-on:pushComment="pushComment"></comment>
         </div>
-    </div>
-   
+    </div>   
 </template>
 
 <script>
@@ -84,9 +84,15 @@
 
 <style lang="scss">
 .article{
-    width: 1160px;
+    max-width: 800px;
     margin: 0 auto;
 }
+
+
+
+
+
+
 
 
 </style>

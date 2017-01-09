@@ -137,7 +137,7 @@ a {
 .view {
   max-width: 800px;
   margin: 0px auto;
-  position: relative;
+  /*position: relative;*/
 }
 
 .fade-enter-active, .fade-leave-active {

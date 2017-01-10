@@ -72,7 +72,7 @@ module.exports = {
       },
       //编译css并自动添加css前缀
       {
-        test : /\.css$/, loader : 'style-loader!autoprefixer-loader!css-loader'
+        test : /\.css$/, include: [path.resolve(__dirname, "not_exist_path")],loader : 'style-loader!autoprefixer-loader!css-loader'
       },
       {
         test : /\.scss$/, loader : 'css-loader!style-loader!sass-loader!node-sass'

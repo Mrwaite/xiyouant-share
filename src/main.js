@@ -9,6 +9,11 @@ import store from './store/index'
 
 import * as filters from './filters/index'
 
+import './public/stylesheets/font.css'
+/*import './public/stylesheets/font-awesome.min.css'*/
+
+/*import Icon from 'vue-awesome/components/Icon.vue'*/
+import '../node_modules/vue-awesome/dist/vue-awesome'
 /*import './public/stylesheets/font.css'*/
 
 Vue.use(VueRouter);

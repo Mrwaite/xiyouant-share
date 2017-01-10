@@ -223,11 +223,5 @@
     margin-top: .3sem;
     padding: 0em .5em;
     background-color: #f2f3f5;
-    span{
-        padding: 0em .5em;
-        background-color: white;
-        color: black;
-        border-radius: 50%;
-    }
 }
 </style>

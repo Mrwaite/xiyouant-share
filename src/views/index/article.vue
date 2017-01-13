@@ -97,6 +97,7 @@
 .article{
     max-width: 800px;
     margin: 0 auto;
+    padding: 20px;
     header{
         h2{
             text-align: center;

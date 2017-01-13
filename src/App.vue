@@ -3,7 +3,7 @@
     <div class="header">
       <div class="inner">
         <router-link to="/" exact>
-          <img class="logo" src="./assets/logo.png" alt="logo">
+          <img class="logo" src="./public/images/logo.png" alt="logo">
         </router-link>
         <router-link to="/path/fe/1">前端</router-link>
         <router-link to="/path/net/1">网络</router-link>
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div id="alertMessage">
+    <div class="alertMessage">
       {{alertMessage}}
     </div>
     <transition name="fade" mode="out-in">
@@ -67,10 +67,20 @@ a {
   text-decoration : none;
 }
 
-#alertMessage {
+.alertMessage {
+  display: none;
   position: absolute;
   right: 0;
-  top: 200px;
+  bottom: 50px;
+  margin-bottom: 20px;
+}
+
+.succcess {
+  background-color: #42b983;
+}
+
+.err{
+  background-color: red;
 }
 
 

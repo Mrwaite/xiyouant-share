@@ -43,5 +43,13 @@
 </script>
 
 <style lang="scss">
-
+.login{
+    width: 50%;
+    margin: 0 auto;
+    div{
+        input{
+            width: 100%;
+        }
+    }
+}
 </style>

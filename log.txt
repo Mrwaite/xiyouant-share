@@ -3268,3 +3268,5 @@ INFO: loading config from /home/mrwaite/shadowsocks.json
 2017-01-10 18:48:08 INFO     connecting www.google.com.hk:443
 2017-01-10 18:48:11 INFO     connecting clients4.google.com:443
 2017-01-10 18:48:31 INFO     connecting mtalk.google.com:5228
+2017-01-10 18:49:52 ERROR    [Errno 104] Connection reset by peer
+2017-01-10 18:49:52 INFO     connecting github.com:443

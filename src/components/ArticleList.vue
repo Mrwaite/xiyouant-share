@@ -26,7 +26,7 @@
                     <br>
                     <span class="meta">
                         <span class="time" title="发表时间">
-                            {{ article.time.date | timeAgo }} ago
+                            {{ article.time.date | timeAgo }}
                         </span>
                          • 
                         <span class="comment" title="评论"><span>{{ article.comments.length }}</span> comments</span>                        

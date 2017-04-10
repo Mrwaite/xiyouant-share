@@ -41,6 +41,7 @@ Post.prototype.save = function(callback){
     //打开数据库
     mongodb.open(function(err, db){
         if(err){
+            mongodb.close();
             return callback(err);
         }
         //读取数据库

@@ -26,6 +26,7 @@
             }
         },
         props: ['articleId', 'type'],
+        //计算属性
         computed : mapState({
             showComment: state => state.user.loginStatus,
             username: state => state.user.username

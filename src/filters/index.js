@@ -10,13 +10,13 @@ export function timeAgo (time) {
   const getTime = new Date(time)
   const between = (new Date() - getTime) / 1000
   if (between < 3600) {
-    return pluralize(~~(between / 60), ' minute')
+    return pluralize(~~(between / 60), ' minute ago')
   } else if (between < 86400) {
-    return pluralize(~~(between / 3600), ' hour')
+    return pluralize(~~(between / 3600), ' hour ago')
   } else if (between < 2592000) {
-    return pluralize(~~(between / 86400), ' day')
+    return pluralize(~~(between / 86400), ' day ago')
   } else {
-    return getTime.getFullYear() + "-" + getTime.getMonth() + 1 + "-" + getTime.getDate()
+    return getTime.getFullYear() + "-" + (getTime.getMonth() + 1) + "-" + getTime.getDate()
   }
 }
 
